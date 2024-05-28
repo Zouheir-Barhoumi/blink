@@ -11,5 +11,10 @@
   "license": "MIT",
   "dependencies": {
     "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "prettier-eslint": "^16.3.0"
   }
 }
