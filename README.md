@@ -1,6 +1,3 @@
-Certainly! Below is a detailed `README.md` for your Real-Time Chat Application named "Blink".
-
-```markdown
 # Blink
 
 Blink is a real-time chat application designed to showcase technical skills in building scalable and responsive web applications using modern web technologies. This application supports user authentication, real-time messaging, chat history, and user status indicators.
