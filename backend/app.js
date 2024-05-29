@@ -2,11 +2,16 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
-// import authRoutes from "./routes/authRoutes.js";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import authRoutes from "./routes/authRoutes.js";
 // import chatRoutes from './routes/chatRoutes.js';
 
-// dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
-dotenv.config({ path: new URL("../.env", import.meta.url).pathname });
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const envPath = join(__dirname, "../.env");
+
+dotenv.config({ path: envPath });
+
 const app = express();
 
 app.use(express.json());
@@ -16,7 +21,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 // app.use('/api/chat', chatRoutes);
 
 export default app;
