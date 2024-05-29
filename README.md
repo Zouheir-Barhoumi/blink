@@ -1,6 +1,6 @@
 # Blink
 
-Blink is a real-time chat application designed to showcase technical skills in building scalable and responsive web applications using modern web technologies. This application supports user authentication, real-time messaging, chat history, and user status indicators.
+Blink is a real-time chat application. This application supports user authentication, real-time messaging, chat history, and user status indicators. Connect. Converse. Collaborate.
 
 ## Table of Contents
 
@@ -37,50 +37,54 @@ Blink is a real-time chat application designed to showcase technical skills in b
 ### Backend
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/blink.git
-    cd blink/backend
-    ```
+
+   ```bash
+   git clone https://github.com/yourusername/blink.git
+   cd blink/backend
+   ```
 
 2. Install dependencies:
-    ```bash
-    npm install
-    ```
+
+   ```bash
+   npm install
+   ```
 
 3. Create a `.env` file in the `backend` directory and add the following environment variables:
-    ```
-    MONGO_URI=mongodb://localhost:27017/blink
-    JWT_SECRET=your_jwt_secret
-    ```
+
+   ```
+   MONGO_URI=mongodb://localhost:27017/blink
+   JWT_SECRET=your_jwt_secret
+   ```
 
 4. Start the backend server:
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 ### Frontend
 
 1. Navigate to the `frontend` directory:
-    ```bash
-    cd ../frontend
-    ```
+
+   ```bash
+   cd ../frontend
+   ```
 
 2. Install dependencies:
-    ```bash
-    npm install
-    ```
+
+   ```bash
+   npm install
+   ```
 
 3. Start the frontend development server:
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 ## Usage
 
 1. Open your browser and go to `http://localhost:3000`.
 2. Register a new account or log in with existing credentials.
 3. Start chatting in real-time with other registered users.
-
 
 ## API Endpoints
 
@@ -132,4 +136,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 **Note:** Replace placeholders like `yourusername` and `your_jwt_secret` with your actual GitHub username and desired JWT secret. Add any additional information specific to your project as needed.
+
+```
+
 ```
