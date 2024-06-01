@@ -6,6 +6,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   profilePicture: { type: String },
   status: { type: String, enum: ["online", "offline"], default: "offline" },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -5,6 +5,7 @@ const ChatSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
   ],
   messages: [
@@ -13,6 +14,10 @@ const ChatSchema = new mongoose.Schema({
       ref: "Message",
     },
   ],
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Chat = mongoose.model("Chat", ChatSchema);
