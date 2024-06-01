@@ -5,7 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import authRoutes from "./routes/authRoutes.js";
-// import chatRoutes from './routes/chatRoutes.js';
+import chatRoutes from "./routes/chatRoutes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const envPath = join(__dirname, "../.env");
@@ -22,6 +22,6 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/auth", authRoutes);
-// app.use('/api/chat', chatRoutes);
+app.use("/api/chat", chatRoutes);
 
 export default app;
