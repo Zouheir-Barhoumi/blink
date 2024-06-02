@@ -4,18 +4,18 @@ import User from "../models/user.js";
 
 const createChat = async (req, res) => {
   try {
-    const { userIds } = req.body;
-    if (!userIds || userIds.length < 2) {
+    const { participants } = req.body;
+    if (!participants || participants.length < 2) {
       return res
         .status(400)
         .json({ error: "At least two users are required to create a chat" });
     }
-    const users = await User.find({ _id: { $in: userIds } });
-    if (users.length !== userIds.length) {
+    const users = await User.find({ _id: { $in: participants } });
+    if (users.length !== participants.length) {
       return res.status(400).json({ error: "Some users were not found" });
     }
 
-    const chat = new Chat({ users: userIds });
+    const chat = new Chat({ participants });
     await chat.save();
     res.status(201).json(chat);
   } catch (error) {
@@ -45,9 +45,6 @@ const sendMessage = async (req, res) => {
 
     chat.messages.push(newMessage._id);
     await chat.save();
-
-    // emit the messageto connected clients
-    io.to(chatId).emit("newMessage", newMessage);
 
     res.status(201).json(newMessage);
   } catch (error) {

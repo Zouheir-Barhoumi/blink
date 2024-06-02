@@ -10,21 +10,45 @@ export const chatSocket = (httpServer) => {
 
   ioServer.on("connection", (socket) => {
     console.log("New client connected", socket.id);
-    // Listen for 'message' events from clients
-    socket.on("message", async ({ chatId, sender, content }) => {
+
+    //  Handle joining a chat
+    socket.on("join", async (chatId) => {
       try {
-        const message = await Message.create({ chatId, sender, content });
-        ioServer.to(chatId).emit("newMessage", message);
+        const chat = await Message.findById(chatId);
+        if (!chat) {
+          return socket.emit("error", { message: "Chat not found" });
+        }
+        socket.join(chatId);
+        console.log(`User ${socket.id} joind chat ${chatId}`);
+        socket.emit("joined", chat);
+        // emit the chat history to the client
+        ioServer.to(chatId).emit("chatHistory", chat);
+        // change status to online
+        socket.to(chatId).emit("statusChange", {
+          userId: socket.id,
+          status: "online",
+        });
       } catch (error) {
-        console.log(`Error sending message: ${error}`);
+        console.log(`Error joining chat: ${error}`);
         return socket.emit("error", { message: "Internal server error" });
       }
     });
 
-    socket.on("join", (chatId) => {
-      if (chatId) {
-        socket.join(chatId);
-        console.log(`User ${socket.id} joined room ${chatId}`);
+    // Listen for 'message' events from clients
+    socket.on("message", async ({ chatId, sender, content }) => {
+      try {
+        const chat = await Message.findById(chatId);
+        if (!chat) {
+          return socket.emit("error", { message: "Chat not found" });
+        }
+        const message = await Message.create({ chatId, sender, content });
+        chat.messages.push(message._id);
+        await chat.save();
+        // emit the message to connected clients
+        ioServer.to(chatId).emit("newMessage", message);
+      } catch (error) {
+        console.log(`Error sending message: ${error}`);
+        return socket.emit("error", { message: "Internal server error" });
       }
     });
 
@@ -43,6 +67,12 @@ export const chatSocket = (httpServer) => {
     // Listen for 'disconnect' events
     socket.on("disconnect", () => {
       console.log("Client disconnected");
+      // notify others in the chat that a user has disconnected
+      socket.rooms.forEach((chatId) => {
+        ioServer
+          .to(chatId)
+          .emit("statusChange", { userId: socket.id, status: "offline" });
+      });
     });
   });
 
