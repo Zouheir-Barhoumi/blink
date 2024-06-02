@@ -12,11 +12,15 @@ const register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "Email already in use" });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       username,
       email,
-      password,
+      password: hashedPassword,
     });
+
+    // todo: send user object without password
+
     res.status(201).json(user);
   } catch (error) {
     console.log(`Error registering user: ${error}`);
@@ -45,8 +49,10 @@ const login = async (req, res) => {
       expiresIn: "1h",
     });
 
+    // todo: send user object without password
+
     // Respond with token
-    res.status(200).json({ user, token });
+    res.status(200).json({ user: user, token });
   } catch (error) {
     console.log(`Error logging in: ${error}`);
     return res.status(500).json({ message: "Internal server error" });
