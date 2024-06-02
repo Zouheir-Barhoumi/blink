@@ -135,7 +135,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**Note:** Replace placeholders like `yourusername` and `your_jwt_secret` with your actual GitHub username and desired JWT secret. Add any additional information specific to your project as needed.
+**Note:** Replace placeholders like `yourusername` and `your_jwt_secret` with your actual GitHub username and desired JWT secret.
 
 ```
 
