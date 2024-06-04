@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import Message from "../models/message.js";
+import Chat from "../models/chat.js";
 
 export const chatSocket = (httpServer) => {
   const ioServer = new Server(httpServer, {
@@ -36,15 +37,29 @@ export const chatSocket = (httpServer) => {
 
     // Listen for 'message' events from clients
     socket.on("message", async ({ chatId, sender, content }) => {
+      console.log(
+        `New message from ${sender} in chat ${chatId}: Conent: ${content}`,
+      );
       try {
-        const chat = await Message.findById(chatId);
+        // Ensure that chat exists and sender is a participant
+        const chat = await Chat.findById(chatId);
         if (!chat) {
           return socket.emit("error", { message: "Chat not found" });
         }
-        const message = await Message.create({ chatId, sender, content });
+        if (!chat.participants.includes(sender)) {
+          return socket.emit("error", {
+            message: "You are not a participant in this chat",
+          });
+        }
+        // Save the message
+        const message = new Message({ chatId, sender, content });
+        await message.save();
+
+        // Add the message to the chat
         chat.messages.push(message._id);
         await chat.save();
-        // emit the message to connected clients
+
+        // Emit the message to connected clients
         ioServer.to(chatId).emit("newMessage", message);
       } catch (error) {
         console.log(`Error sending message: ${error}`);
