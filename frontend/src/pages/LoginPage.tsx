@@ -12,6 +12,8 @@ const LoginForm: React.FC = () => {
       const response = await login(email, password);
       console.log("Login success: ", response);
       alert("Login successful: " + JSON.stringify(response));
+      localStorage.setItem("username", response.user.username);
+      window.location.href = "/chat";
     } catch (error) {
       alert("Login failed: " + error);
       console.log("Login failed", error);

@@ -14,6 +14,7 @@ const RegisterForm = () => {
 
       console.log("response: ", response);
       alert("registration successful: " + JSON.stringify(response));
+      window.location.href = "/login";
     } catch (error) {
       alert("registration failed: " + error);
       console.log("registration failed", error);

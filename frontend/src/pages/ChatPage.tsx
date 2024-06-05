@@ -1,9 +1,11 @@
 import React from "react";
 import ChatWindow from "../components/ChatWindow";
 
+const user = localStorage.getItem("username");
 const ChatPage: React.FC = () => {
   return (
     <div>
+      <h1>Welcome, {user}!</h1>
       <h2>Chat Page</h2>
       <ChatWindow
         chatId="665c2e6b592945ecab1c35d3"
