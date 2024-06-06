@@ -13,7 +13,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
     if (message.trim()) {
       socketService.sendMessage(chatId, userId, message);
       setMessage("");
-      socketService.stopTyping(chatId);
+      socketService.stopTyping({ userId, chatId });
     }
   };
 
@@ -22,7 +22,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
   };
 
   const handleStopTyping = () => {
-    socketService.stopTyping(chatId);
+    socketService.stopTyping({ userId, chatId });
   };
 
   return (

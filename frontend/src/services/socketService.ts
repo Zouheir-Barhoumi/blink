@@ -12,7 +12,7 @@ interface ClientToServerEvents {
   message: (data: { chatId: string; sender: string; content: string }) => void;
   join: (chatId: string) => void;
   typing: (data: { userId: string; chatId: string }) => void;
-  stopTyping: (chatId: string) => void;
+  stopTyping: (data: { userId: string; chatId: string }) => void;
 }
 
 class SocketService {
@@ -44,9 +44,9 @@ class SocketService {
     this.socket?.emit("typing", { userId: data.userId, chatId: data.chatId });
   }
 
-  stopTyping(chatId: string) {
+  stopTyping(data: { userId: string; chatId: string }) {
     console.log("Frontend Service: stop typing");
-    this.socket?.emit("stopTyping", chatId);
+    this.socket?.emit("stopTyping", data);
   }
 
   onNewMessage(callback: (message: any) => void) {
