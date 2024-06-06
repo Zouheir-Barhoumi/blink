@@ -67,19 +67,21 @@ export const chatSocket = (httpServer) => {
       }
     });
 
-    socket.on("typing", (chatId) => {
-      if (chatId) {
+    socket.on("typing", (data) => {
+      if (data) {
         // socket.to(chatId).emit("typing", socket.id);
-        socket.emit("typing", socket.id);
-        console.log(`User ${socket.id} is typing in chat ${chatId}`);
+        socket.emit("typing", data.userId);
+        console.log(`User ${data.userId} is typing in chat ${data.chatId}`);
       }
     });
 
-    socket.on("stopTyping", ({ chatId, user }) => {
-      if (chatId) {
+    socket.on("stopTyping", (data) => {
+      if (data) {
         // socket.to(chatId).emit("stopTyping", { user });
-        socket.emit("stopTyping", { user });
-        console.log(`User ${socket.id} stopped typing in chat ${chatId}`);
+        socket.emit("stopTyping", socket.id);
+        console.log(
+          `User ${data.userId} stopped typing in chat ${data.chatId}`,
+        );
       }
     });
 

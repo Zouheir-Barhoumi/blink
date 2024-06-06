@@ -18,7 +18,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
   };
 
   const handleTyping = () => {
-    socketService.typing(chatId);
+    socketService.typing({ userId, chatId });
   };
 
   const handleStopTyping = () => {
