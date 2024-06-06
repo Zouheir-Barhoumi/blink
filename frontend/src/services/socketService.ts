@@ -2,7 +2,7 @@ import { io, Socket } from "socket.io-client";
 
 interface ServerToClientEvents {
   newMessage: (message: any) => void;
-  typing: (data: object) => void;
+  typing: (userId: string) => void;
   stopTyping: (userId: string) => void;
   chatHistory: (chat: any) => void;
   statusChange: (data: { userId: string; status: string }) => void;
@@ -11,7 +11,7 @@ interface ServerToClientEvents {
 interface ClientToServerEvents {
   message: (data: { chatId: string; sender: string; content: string }) => void;
   join: (chatId: string) => void;
-  typing: (chatId: string) => void;
+  typing: (data: { userId: string; chatId: string }) => void;
   stopTyping: (chatId: string) => void;
 }
 
@@ -39,9 +39,9 @@ class SocketService {
     this.socket?.emit("message", { chatId, sender, content });
   }
 
-  typing(data: object) {
+  typing(data: { userId: string; chatId: string }) {
     console.log("Frontend Service: typing");
-    this.socket?.emit("typing", JSON.stringify(data));
+    this.socket?.emit("typing", { userId: data.userId, chatId: data.chatId });
   }
 
   stopTyping(chatId: string) {

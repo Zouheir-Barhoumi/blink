@@ -26,7 +26,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
 
     socketService.onTyping((userId) => {
       console.log(`ChatWindow: User ${userId} is typing...`);
-      setTypingUsers((prevTypingUsers) => [...prevTypingUsers, userId]);
+      setTypingUsers((prevTypingUsers) => {
+        if (!prevTypingUsers.includes(userId)) {
+          return [...prevTypingUsers, userId];
+        }
+        return prevTypingUsers;
+      });
     });
 
     socketService.onStopTyping((userId) => {
