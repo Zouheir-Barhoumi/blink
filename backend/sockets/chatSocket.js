@@ -79,7 +79,7 @@ export const chatSocket = (httpServer) => {
     socket.on("stopTyping", (data) => {
       if (data) {
         // socket.to(chatId).emit("stopTyping", { user });
-        socket.emit("stopTyping", socket.id);
+        socket.emit("stopTyping", data.userId);
         console.log(
           `User ${data.userId} stopped typing in chat ${data.chatId}`,
         );
