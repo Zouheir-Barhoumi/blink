@@ -24,7 +24,9 @@ class SocketService {
       withCredentials: true,
     });
 
-    this.socket.on("connect", () => {});
+    this.socket.on("connect", () => {
+      console.log("Frontend Service: Connected to server");
+    });
 
     this.socket.on("disconnect", () => {});
   }
@@ -38,10 +40,12 @@ class SocketService {
   }
 
   typing(chatId: string) {
+    console.log("Frontend Service: typing");
     this.socket?.emit("typing", chatId);
   }
 
   stopTyping(chatId: string) {
+    console.log("Frontend Service: stop typing");
     this.socket?.emit("stopTyping", chatId);
   }
 

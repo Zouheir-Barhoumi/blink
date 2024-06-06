@@ -31,7 +31,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        onKeyPress={handleTyping}
+        onKeyDown={handleTyping}
         onKeyUp={handleStopTyping}
       />
 

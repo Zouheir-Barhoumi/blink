@@ -16,7 +16,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, typingUsers }) => {
       ))}
       {typingUsers.map((userId, index) => (
         <div key={index} className="typing">
-          {userId} is typing...
+          {userId} is typing... {index}
         </div>
       ))}
     </div>
