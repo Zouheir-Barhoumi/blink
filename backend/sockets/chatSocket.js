@@ -91,9 +91,8 @@ export const chatSocket = (httpServer) => {
       console.log("Client disconnected");
       // notify others in the chat that a user has disconnected
       socket.rooms.forEach((chatId) => {
-        ioServer
-          .to(chatId)
-          .emit("statusChange", { userId: socket.id, status: "offline" });
+        // ioServer.to(chatId).emit("statusChange", { userId: socket.id, status: "offline" });
+        ioServer.emit("statusChange", { userId: socket.id, status: "offline" });
       });
     });
   });
