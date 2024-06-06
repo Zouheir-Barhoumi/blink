@@ -60,7 +60,8 @@ export const chatSocket = (httpServer) => {
         await chat.save();
 
         // Emit the message to connected clients
-        ioServer.to(chatId).emit("newMessage", message);
+        // ioServer.to(chatId).emit("newMessage", message);
+        ioServer.emit("newMessage", message);
       } catch (error) {
         console.log(`Error sending message: ${error}`);
         return socket.emit("error", { message: "Internal server error" });

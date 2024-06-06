@@ -20,7 +20,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
     socketService.joinChat(chatId);
 
     socketService.onNewMessage((message) => {
-      console.log(`ChatWindow: New Message Received: ${message}`);
+      console.log(`ChatWindow: New Message Sent: ${message}`);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
