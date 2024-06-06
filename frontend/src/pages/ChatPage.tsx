@@ -11,13 +11,13 @@ const ChatPage: React.FC = () => {
         chatId="665c2e6b592945ecab1c35d3"
         userId="665c257525713d838e9ab6fd"
       />
-      <div>
+      {/* <div>
         <p>Chat messages will appear here.</p>
       </div>
       <form>
         <input type="text" placeholder="Enter your message here..." />
         <button type="submit">Send</button>
-      </form>
+      </form> */}
     </div>
   );
 };
