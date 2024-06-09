@@ -31,48 +31,63 @@ const RegisterForm = () => {
     }
   };
   return (
-    <>
-      <Flex align="center" justify="center" h="100vh" mt={-8}>
-        <Box>
-          <Heading mb={8}>Register</Heading>
-          <form onSubmit={handleSubmit}>
-            <FormControl id="username" mb={4} isRequired>
-              <FormLabel>Username</FormLabel>
-              <Input
-                type="text"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
-            </FormControl>
-            <FormControl id="email" mb={4} isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </FormControl>
-            <FormControl id="password" mb={4} isRequired>
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </FormControl>
-            <Button type="submit" bgColor="primary" mb={4}>
-              Register
-            </Button>
-            <Text color="secondary" mb={4}>
-              Already have an account?{" "}
-              <Link to="/login" color="secondary">
-                <Text color="greenV">Login</Text>
+    <Flex align="center" justify="center" h="100vh">
+      <Box
+        position="relative"
+        w="400px"
+        px="40px"
+        bg="bgL"
+        boxShadow="lg"
+        clipPath="polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)"
+      >
+        <Heading pt="4">Register</Heading>
+        <form onSubmit={handleSubmit} style={{ border: "none" }}>
+          <FormControl id="username" mb={2} isRequired>
+            <FormLabel>Username</FormLabel>
+            <Input
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              borderRadius="0"
+            />
+          </FormControl>
+          <FormControl id="email" mb={2} isRequired>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              borderRadius="0"
+            />
+          </FormControl>
+          <FormControl id="password" mb={4} isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              borderRadius="0"
+            />
+          </FormControl>
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <Text fontSize="sm">
+              You have an account?{" "}
+              <Link to="/login">
+                <Text color="secondary.200">Login</Text>
               </Link>
             </Text>
-          </form>
-        </Box>
-      </Flex>
-    </>
+            <Button
+              type="submit"
+              color="white"
+              bgColor="tertiary"
+              alignSelf={"flex-end"}
+            >
+              Register
+            </Button>
+          </Flex>
+        </form>
+      </Box>
+    </Flex>
   );
 };
 
