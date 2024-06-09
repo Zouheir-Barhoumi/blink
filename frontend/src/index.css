@@ -1,7 +1,7 @@
 /* import Azonix.otf font from /src/assets/fonts/azonix */
 @font-face {
   font-family: "Azonix";
-  src: url("/src/assets/fonts/azonix.otf") format("opentype");
+  src: url("/src/assets/fonts/azonix/azonix.otf") format("opentype");
 }
 li {
   list-style: none;
