@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ChatPage from "./pages/ChatPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
+import { Flex, Box, Image, Text } from "@chakra-ui/react";
 
 const Navigation: React.FC = () => {
   const location = useLocation();
@@ -30,7 +31,27 @@ const Navigation: React.FC = () => {
 
 function App() {
   return (
-    <div className="App">
+    <Box className="App" position="relative">
+      <Flex
+        position="absolute"
+        boxSize="111px"
+        alignItems="center"
+        zIndex={1000}
+      >
+        <Image
+          src="/src/assets/images/logo.png"
+          alt="logo"
+          transform="rotate(90deg)"
+        ></Image>
+        <Text
+          transform="translateY(.3rem)"
+          fontSize="5xl"
+          letterSpacing="4px"
+          color="primary.200"
+        >
+          Blink
+        </Text>
+      </Flex>
       <Navigation />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
@@ -39,7 +60,7 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </div>
+    </Box>
   );
 }
 

@@ -7,10 +7,15 @@ import "@fontsource-variable/genos";
 const theme = extendTheme({
   colors: {
     primary: { "100": "#00FFCC", "200": "#41F794" },
-    secondary: { "100": "#5EEBFB", "200": "#13F7FD" },
+    secondary: {
+      "100": "#5EEBFB",
+      "200": "#13F7FD",
+      "300": "#13004B",
+    },
     tertiary: "#035829",
     background: "#1E1E1E",
-    bgL: "#111622",
+    bgD: "#111622",
+    bgL: "#13284B",
     black: "#121212",
     textPrimary: "#FFFFFF",
     textSecondary: "#B3B3B3",
