@@ -34,7 +34,7 @@ function App() {
     <Box className="App" position="relative">
       <Flex
         position="absolute"
-        boxSize="111px"
+        boxSize="100px"
         alignItems="center"
         zIndex={1000}
       >
@@ -45,8 +45,8 @@ function App() {
         ></Image>
         <Text
           transform="translateY(.3rem)"
-          fontSize="5xl"
-          letterSpacing="4px"
+          fontSize="4xl"
+          letterSpacing="6px"
           color="primary.200"
         >
           Blink

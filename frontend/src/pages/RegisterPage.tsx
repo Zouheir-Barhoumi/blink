@@ -41,7 +41,7 @@ const RegisterForm = () => {
         bgSize="cover"
         bgPosition="center"
         bgRepeat="no-repeat"
-        filter={"brightness(0.4)"}
+        filter={"brightness(0.3)"}
       >
         <Box
           position="absolute"
