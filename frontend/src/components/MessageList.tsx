@@ -8,7 +8,6 @@ interface MessageListProps {
 const MessageList: React.FC<MessageListProps> = ({ messages, typingUsers }) => {
   return (
     <div className="message-list">
-      <h2>Message List</h2>
       {messages.map((message, index) => (
         <div key={index} className="message">
           <strong>{message.sender}</strong>: {message.content}

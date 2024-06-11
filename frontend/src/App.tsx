@@ -12,36 +12,33 @@ const Navigation: React.FC = () => {
   if (location.pathname === "/login" || location.pathname === "/register") {
     return null;
   }
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/login"> Login</Link>
-        </li>
-        <li>
-          <Link to="/register"> Register</Link>
-        </li>
-        <li>
-          <Link to="/chat"> Chat</Link>
-        </li>
-      </ul>
-    </nav>
-  );
+  // return (
+  //   <nav>
+  //     <ul>
+  //       <li>
+  //         <Link to="/login"> Login</Link>
+  //       </li>
+  //       <li>
+  //         <Link to="/register"> Register</Link>
+  //       </li>
+  //       <li>
+  //         <Link to="/chat"> Chat</Link>
+  //       </li>
+  //     </ul>
+  //   </nav>
+  // );
+  return null;
 };
 
 function App() {
   return (
-    <Box className="App" position="relative">
-      <Flex
-        position="absolute"
-        boxSize="100px"
-        alignItems="center"
-        zIndex={1000}
-      >
+    <Box className="App" position="relative" bg="bgD">
+      <Flex position="absolute" alignItems="center" zIndex={1000}>
         <Image
           src="/src/assets/images/logo.png"
           alt="logo"
           transform="rotate(90deg)"
+          h="80px"
         ></Image>
         <Text
           transform="translateY(.3rem)"

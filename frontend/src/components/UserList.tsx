@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUsers } from "../services/usersService";
 import UserCard from "./UserCard";
+import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
 
 // interface User {
 //   _id: string;
@@ -14,8 +15,10 @@ import UserCard from "./UserCard";
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<Record<string, any>[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeStates, setActiveStates] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,19 +44,69 @@ const UserList: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+  const toggleActiveState = (user: any, index: number) => {
+    // setUserId(user._id);
+    setUserId(user.username);
+    setActiveStates(() => {
+      const newStates: boolean[] = [];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
 
   return (
-    <div className="user-list">
-      <h3>Users in Chat</h3>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>{user.username}</li>
-          // <li key={user._id}>
-          //   <UserCard name={user.username} profilePic="" lastMessage="" />
-          // </li>
+    <Box
+      bgColor="black"
+      display="flex"
+      w="fit-content"
+      flexDir="column"
+      alignItems="center"
+      border="1px"
+      borderColor="primary.100"
+      borderRadius={"20px"}
+      py="8px"
+      px="4px"
+    >
+      <Heading size="md">Users in Chat</Heading>
+      <Text mb="8px">{userId}</Text>
+      <UnorderedList display="flex" flexDir="column" alignItems="center" m={0}>
+        {users.map((user, index) => (
+          <ListItem
+            onClick={() => toggleActiveState(user, index)}
+            position="relative"
+            key={user._id}
+            w="310px"
+            border="1px"
+            borderColor="greyBox"
+            borderRadius="20px"
+            boxShadow="0 4px 4px #41F794"
+            _before={{
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              bgGradient: activeStates[index]
+                ? "linear(to-r, primary.200, secondary.100)"
+                : "linear(to-r, bgD, bgD)",
+              opacity: 0.25,
+              zIndex: 0,
+              borderRadius: "20px",
+            }}
+          >
+            <Box zIndex={1} position="relative">
+              <UserCard
+                name={user.username}
+                profilePic=""
+                lastMessage=""
+                status="online"
+              />
+            </Box>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </UnorderedList>
+    </Box>
   );
 };
 

@@ -19,7 +19,7 @@ const theme = extendTheme({
     black: "#121212",
     textPrimary: "#FFFFFF",
     textSecondary: "#B3B3B3",
-    greyBox: "#D9D9D9",
+    greyBox: "#DDF9FF",
     messageOutgoing: "#00FFCC",
     messageIncoming: "#333333",
     statusOnline: "#00FF00",

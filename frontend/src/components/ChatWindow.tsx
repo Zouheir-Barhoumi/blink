@@ -3,6 +3,7 @@ import socketService from "../services/socketService";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import UserList from "./UserList";
+import { Flex, Box } from "@chakra-ui/react";
 
 interface ChatWindowProps {
   chatId: string;
@@ -48,11 +49,14 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
   }, [chatId]);
 
   return (
-    <div className="chat-window">
-      <UserList chatId={chatId} />
-      <MessageList messages={messages} typingUsers={typingUsers} />
-      <MessageInput chatId={chatId} userId={userId} />
-    </div>
+    <Flex className="chat-window" mt="4rem" gap="1rem">
+      {/* <UserList chatId={chatId} /> */}
+      <UserList />
+      <Box w="100%" h="100%">
+        <MessageList messages={messages} typingUsers={typingUsers} />
+        <MessageInput chatId={chatId} userId={userId} />
+      </Box>
+    </Flex>
   );
 };
 
