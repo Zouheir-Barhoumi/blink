@@ -27,12 +27,26 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
   };
 
   return (
-    <Flex bg="green" flexDir="column" h="calc(100vh - 7rem)">
-      {/* Messages go here */}
-      <Box flex="1" w="100%" overflow="auto" bg="black"></Box>
+    <Flex
+      bg="black"
+      flexDir="column"
+      h="calc(100vh - 8rem)"
+      borderRadius="20px"
+    >
+      <Box flex="1" w="100%" overflow="auto" bg="black" borderRadius="20px">
+        {/* Messages go here */}
+      </Box>
 
       {/* Input Box at the bottom */}
-      <Flex align="center" w="100%">
+      <Flex
+        align="center"
+        w="100%"
+        borderRadius="20px"
+        bg="background"
+        h="6rem"
+        px="3rem"
+        // gap="1rem"
+      >
         <Input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -41,8 +55,29 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
           m={0}
           flex="1"
           bg="white"
+          color="black"
+          borderRadius="20px 0 0 20px"
+          zIndex={0}
+          _focus={{
+            outline: "none",
+            boxShadow: "none",
+            border: "none",
+            zIndex: "0",
+          }}
         />
-        <Button onClick={handleSendMessage}>Send</Button>
+        <Button
+          position="relative"
+          onClick={handleSendMessage}
+          bg="bgL"
+          color="wheat"
+          ml="-1rem"
+          border="4px"
+          borderColor="white"
+          borderRadius="20px"
+          _hover={{ bg: "bgD", color: "white" }}
+        >
+          Send
+        </Button>
       </Flex>
     </Flex>
 

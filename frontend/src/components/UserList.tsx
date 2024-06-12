@@ -58,7 +58,7 @@ const UserList: React.FC = () => {
     <Box
       bgColor="black"
       display="flex"
-      h="calc(100vh - 7rem)"
+      h="calc(100vh - 8rem)"
       w="100%"
       maxW="320px"
       flexDir="column"
@@ -69,6 +69,7 @@ const UserList: React.FC = () => {
       py="8px"
       px="4px"
       overflowY="auto"
+      mb="1rem"
     >
       <Box w="100%" top="0" position="sticky" bg="black" zIndex={100}>
         <Heading size="md">Users in Chat</Heading>
