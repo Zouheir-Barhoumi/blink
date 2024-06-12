@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import socketService from "../services/socketService";
+import { Box, Flex, Input, Button } from "@chakra-ui/react";
 
 interface MessageInputProps {
   chatId: string;
@@ -26,17 +27,27 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
   };
 
   return (
-    <div className="message-input">
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleTyping}
-        onKeyUp={handleStopTyping}
-      />
+    <Flex bg="green" flexDir="column" h="calc(100vh - 7rem)">
+      {/* Messages go here */}
+      <Box flex="1" w="100%" overflow="auto" bg="black"></Box>
 
-      <button onClick={handleSendMessage}>Send</button>
-    </div>
+      {/* Input Box at the bottom */}
+      <Flex align="center" w="100%">
+        <Input
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleTyping}
+          onKeyUp={handleStopTyping}
+          m={0}
+          flex="1"
+          bg="white"
+        />
+        <Button onClick={handleSendMessage}>Send</Button>
+      </Flex>
+    </Flex>
+
+    // <Flex bg="black">
+    // </Flex>
   );
 };
 

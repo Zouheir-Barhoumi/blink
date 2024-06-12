@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getUsers } from "../services/usersService";
 import UserCard from "./UserCard";
 import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
@@ -58,7 +58,9 @@ const UserList: React.FC = () => {
     <Box
       bgColor="black"
       display="flex"
-      w="fit-content"
+      h="calc(100vh - 7rem)"
+      w="100%"
+      maxW="320px"
       flexDir="column"
       alignItems="center"
       border="1px"
@@ -66,20 +68,24 @@ const UserList: React.FC = () => {
       borderRadius={"20px"}
       py="8px"
       px="4px"
+      overflowY="auto"
     >
-      <Heading size="md">Users in Chat</Heading>
-      <Text mb="8px">{userId}</Text>
+      <Box w="100%" top="0" position="sticky" bg="black" zIndex={100}>
+        <Heading size="md">Users in Chat</Heading>
+        <Text mb="8px">{userId}</Text>
+      </Box>
       <UnorderedList display="flex" flexDir="column" alignItems="center" m={0}>
         {users.map((user, index) => (
           <ListItem
             onClick={() => toggleActiveState(user, index)}
+            cursor="pointer"
             position="relative"
             key={user._id}
             w="310px"
             border="1px"
             borderColor="greyBox"
             borderRadius="20px"
-            boxShadow="0 4px 4px #41F794"
+            boxShadow={activeStates[index] ? "0 4px 4px #41F794" : "none"}
             _before={{
               content: '""',
               position: "absolute",

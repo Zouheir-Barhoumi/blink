@@ -49,7 +49,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
   }, [chatId]);
 
   return (
-    <Flex className="chat-window" mt="4rem" gap="1rem">
+    <Flex className="chat-window" pt="7rem" gap="1rem">
       {/* <UserList chatId={chatId} /> */}
       <UserList />
       <Box w="100%" h="100%">

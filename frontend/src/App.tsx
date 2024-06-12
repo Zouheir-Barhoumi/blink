@@ -6,29 +6,29 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
 import { Flex, Box, Image, Text } from "@chakra-ui/react";
 
-const Navigation: React.FC = () => {
-  const location = useLocation();
+// const Navigation: React.FC = () => {
+//   const location = useLocation();
 
-  if (location.pathname === "/login" || location.pathname === "/register") {
-    return null;
-  }
-  // return (
-  //   <nav>
-  //     <ul>
-  //       <li>
-  //         <Link to="/login"> Login</Link>
-  //       </li>
-  //       <li>
-  //         <Link to="/register"> Register</Link>
-  //       </li>
-  //       <li>
-  //         <Link to="/chat"> Chat</Link>
-  //       </li>
-  //     </ul>
-  //   </nav>
-  // );
-  return null;
-};
+//   if (location.pathname === "/login" || location.pathname === "/register") {
+//     return null;
+//   }
+// return (
+//   <nav>
+//     <ul>
+//       <li>
+//         <Link to="/login"> Login</Link>
+//       </li>
+//       <li>
+//         <Link to="/register"> Register</Link>
+//       </li>
+//       <li>
+//         <Link to="/chat"> Chat</Link>
+//       </li>
+//     </ul>
+//   </nav>
+// );
+//   return null;
+// };
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
           Blink
         </Text>
       </Flex>
-      <Navigation />
+      {/* <Navigation /> */}
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
