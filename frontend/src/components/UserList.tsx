@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getUsers } from "../services/usersService";
 import UserCard from "./UserCard";
 import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";

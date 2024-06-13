@@ -1,6 +1,6 @@
 import React from "react";
 import ChatWindow from "../components/ChatWindow";
-import { Container, Heading } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 
 // const user = localStorage.getItem("username");
 const ChatPage: React.FC = () => {
