@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import socketService from "../services/socketService";
 import { Box, Flex, Input, Button } from "@chakra-ui/react";
+import MessageList from "./MessageList";
 
 interface MessageInputProps {
   chatId: string;
   userId: string;
+  messages: any[];
+  typingUsers: string[];
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
+const MessageInput: React.FC<MessageInputProps> = ({
+  chatId,
+  userId,
+  messages,
+  typingUsers,
+}) => {
   const [message, setMessage] = useState("");
 
   const handleSendMessage = () => {
@@ -35,6 +43,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ chatId, userId }) => {
     >
       <Box flex="1" w="100%" overflow="auto" bg="black" borderRadius="20px">
         {/* Messages go here */}
+        <MessageList messages={messages} typingUsers={typingUsers} />
       </Box>
 
       {/* Input Box at the bottom */}

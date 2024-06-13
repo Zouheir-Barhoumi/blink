@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import socketService from "../services/socketService";
-import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import UserList from "./UserList";
 import { Flex, Box } from "@chakra-ui/react";
@@ -53,8 +52,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
       {/* <UserList chatId={chatId} /> */}
       <UserList />
       <Box w="100%" h="100%">
-        <MessageList messages={messages} typingUsers={typingUsers} />
-        <MessageInput chatId={chatId} userId={userId} />
+        <MessageInput
+          chatId={chatId}
+          userId={userId}
+          messages={messages}
+          typingUsers={typingUsers}
+        />
       </Box>
     </Flex>
   );
