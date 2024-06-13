@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getUsers } from "../services/usersService";
 import UserCard from "./UserCard";
 import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
@@ -13,7 +13,11 @@ import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
 //   __v: number;
 // }
 
-const UserList: React.FC = () => {
+interface UserListProps {
+  onSelectChat: (chatId: string) => void;
+}
+
+const UserList: React.FC<UserListProps> = ({ onSelectChat }) => {
   const [users, setUsers] = useState<Record<string, any>[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -44,9 +48,25 @@ const UserList: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  const toggleActiveState = (user: any, index: number) => {
+  const toggleActiveState = async (user: any, index: number) => {
     // setUserId(user._id);
     setUserId(user.username);
+    try {
+      let chatId;
+      /** Check if user chat exists  */
+      const existingChat = await getChat();
+      if (existingChat) {
+        chatId = existingChat._id;
+      } else {
+        const newChat = await createChat([userId, user._id]);
+        chatId = newChat._id;
+      }
+      // Notify parent component of the selected chat
+      onSelectChat(chatId);
+    } catch (error) {
+      console.log("Error setting chat state", error);
+    }
+
     setActiveStates(() => {
       const newStates: boolean[] = [];
       newStates[index] = !newStates[index];

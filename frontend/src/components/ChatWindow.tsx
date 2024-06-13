@@ -4,20 +4,22 @@ import MessageInput from "./MessageInput";
 import UserList from "./UserList";
 import { Flex, Box } from "@chakra-ui/react";
 
-interface ChatWindowProps {
-  chatId: string;
-  userId: string;
-}
+// interface ChatWindowProps {
+//   chatId: string;
+//   userId: string;
+// }
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
+const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
+  const userId = "665c257525713d838e9ab6fd";
+  const [chatId, setChatId] = useState<string | null>(null);
 
   useEffect(() => {
     console.log("ChatWindow: useEffect");
     socketService.connect("http://localhost:5000");
 
-    socketService.joinChat(chatId);
+    socketService.joinChat(chatId || "");
 
     socketService.onNewMessage((message) => {
       console.log(`ChatWindow: New Message Sent: ${message.content}`);
@@ -50,10 +52,10 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, userId }) => {
   return (
     <Flex className="chat-window" pt="7rem" gap="1rem">
       {/* <UserList chatId={chatId} /> */}
-      <UserList />
+      <UserList onSelectChat={setChatId} />
       <Box w="100%" h="100%">
         <MessageInput
-          chatId={chatId}
+          chatId={chatId || ""}
           userId={userId}
           messages={messages}
           typingUsers={typingUsers}
