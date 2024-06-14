@@ -97,7 +97,7 @@ const UserList: React.FC<UserListProps> = ({ onSelectChat, userId }) => {
     >
       <Box w="100%" top="0" position="sticky" bg="black" zIndex={100}>
         <Heading size="md">Users in Chat</Heading>
-        <Text mb="8px">{userId}</Text>
+        <Text mb="8px">{localStorage.getItem("username")}</Text>
       </Box>
       <UnorderedList display="flex" flexDir="column" alignItems="center" m={0}>
         {users.map((user, index) => (
