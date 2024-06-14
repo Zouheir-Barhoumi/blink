@@ -16,10 +16,9 @@ import { getChat, createChat } from "../services/chatService";
 
 interface UserListProps {
   onSelectChat: (chatId: string) => void;
-  userId: string;
 }
 
-const UserList: React.FC<UserListProps> = ({ onSelectChat, userId }) => {
+const UserList: React.FC<UserListProps> = ({ onSelectChat }) => {
   const [users, setUsers] = useState<Record<string, any>[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -54,8 +53,9 @@ const UserList: React.FC<UserListProps> = ({ onSelectChat, userId }) => {
     setSelectedUserId(user._id);
     try {
       let chatId;
+      const userId = localStorage.getItem("userId");
       /** Check if user chat exists  */
-      if (selectedUserId) {
+      if (selectedUserId && userId) {
         const existingChat = await getChat(selectedUserId, userId);
         if (existingChat) {
           chatId = existingChat._id;
