@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Chat from "../models/chat.js";
 import Message from "../models/message.js";
 import User from "../models/user.js";
@@ -66,12 +67,29 @@ const getChatHistory = async (req, res) => {
 // Get chat by user1 and user2 ids
 const getChatByUsers = async (req, res) => {
   try {
-    const { user1, user2 } = req.query;
+    const { user1, user2 } = req.params;
+    /* 
+     TODO: remove logging
+    */
+    console.log(`user1: ${user1} \t user2: ${user2}`);
+    /* end of logging */
+    if (
+      !mongoose.Types.ObjectId.isValid(user1) ||
+      !mongoose.Types.ObjectId.isValid(user2)
+    ) {
+      return res.status(400).json({ error: "invalid user ID" });
+    }
     const chat = await Chat.findOne({
-      $or: [{ participants: [user1, user2] }, { participants: [user2, user1] }],
+      // $or: [{ participants: [user1, user2] }, { participants: [user2, user1] }],
+      participants: { $in: [user2, user1] },
     });
+    // const chat = await Chat.findOne({
+    //   participants: { $in: [user1, user2] },
+    //   $expr: { $eq: [{ $size: "$participants" }, 2] },
+    // });
+
     if (!chat) {
-      return res.status(404).json({ error: "Chat not found" });
+      return res.status(404).json({ error: "Chat not foundsies" });
     }
 
     res.status(200).json(chat);

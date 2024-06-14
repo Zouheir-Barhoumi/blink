@@ -54,7 +54,9 @@ const UserList: React.FC<UserListProps> = ({ onSelectChat }) => {
     try {
       let chatId;
       const userId = localStorage.getItem("userId");
-      /** Check if user chat exists  */
+      /*
+       ?Check if user chat exists  
+      */
       if (selectedUserId && userId) {
         const existingChat = await getChat(selectedUserId, userId);
         /*

@@ -5,7 +5,7 @@ const API_URL = "http://localhost:5000/api/chat";
 export const getChat = async (user1: string, user2: string) => {
   console.log("Hi from getChat");
   try {
-    const response = await axios.get(`{API_URL}/users/${user1}/${user2}`);
+    const response = await axios.get(`{API_URL}/${user1}/${user2}`);
     return response.data;
   } catch (error: any) {
     if (error.response && error.response.status == 404) {
