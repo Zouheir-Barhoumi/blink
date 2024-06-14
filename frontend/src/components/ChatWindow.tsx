@@ -16,32 +16,39 @@ const ChatWindow: React.FC = () => {
   const [chatId, setChatId] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("ChatWindow: useEffect");
-    socketService.connect("http://localhost:5000");
+    const connectSocket = async () => {
+      console.log("ChatWindow: useEffect");
+      socketService.connect("http://localhost:5000");
 
-    socketService.joinChat(chatId || "");
+      if (chatId) {
+        socketService.joinChat(chatId);
+        console.log("ChatWindow: connected");
+      }
 
-    socketService.onNewMessage((message) => {
-      console.log(`ChatWindow: New Message Sent: ${message.content}`);
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    socketService.onTyping((userId) => {
-      console.log(`ChatWindow: User ${userId} is typing...`);
-      setTypingUsers((prevTypingUsers) => {
-        if (!prevTypingUsers.includes(userId)) {
-          return [...prevTypingUsers, userId];
-        }
-        return prevTypingUsers;
+      socketService.onNewMessage((message) => {
+        console.log(`ChatWindow: New Message Sent: ${message.content}`);
+        setMessages((prevMessages) => [...prevMessages, message]);
       });
-    });
 
-    socketService.onStopTyping((userId) => {
-      console.log(`ChatWindow: User ${userId} stopped typing...`);
-      setTypingUsers((prevTypingUsers) =>
-        prevTypingUsers.filter((id) => id !== userId),
-      );
-    });
+      socketService.onTyping((userId) => {
+        console.log(`ChatWindow: User ${userId} is typing...`);
+        setTypingUsers((prevTypingUsers) => {
+          if (!prevTypingUsers.includes(userId)) {
+            return [...prevTypingUsers, userId];
+          }
+          return prevTypingUsers;
+        });
+      });
+
+      socketService.onStopTyping((userId) => {
+        console.log(`ChatWindow: User ${userId} stopped typing...`);
+        setTypingUsers((prevTypingUsers) =>
+          prevTypingUsers.filter((id) => id !== userId),
+        );
+      });
+    };
+
+    connectSocket();
 
     return () => {
       console.log("ChatWindow: Disconnecting from socket server");
@@ -52,7 +59,7 @@ const ChatWindow: React.FC = () => {
   return (
     <Flex className="chat-window" pt="7rem" gap="1rem">
       {/* <UserList chatId={chatId} /> */}
-      <UserList onSelectChat={setChatId} />
+      <UserList onSelectChat={setChatId} userId={userId} />
       <Box w="100%" h="100%">
         <MessageInput
           chatId={chatId || ""}
