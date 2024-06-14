@@ -73,7 +73,8 @@ const getChatByUsers = async (req, res) => {
     if (!chat) {
       return res.status(404).json({ error: "Chat not found" });
     }
-    res.status(200).json(chatId);
+
+    res.status(200).json(chat);
   } catch (error) {
     console.log(`Error retrieving chat ID: ${error}`);
     return res.status(500).json({ message: "Internal server error" });

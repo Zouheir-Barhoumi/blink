@@ -12,7 +12,7 @@ import { Flex, Box } from "@chakra-ui/react";
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
-  const userId = "665c257525713d838e9ab6fd";
+  const userId = "665c750a4845307cff5e6442";
   const [chatId, setChatId] = useState<string | null>(null);
 
   useEffect(() => {

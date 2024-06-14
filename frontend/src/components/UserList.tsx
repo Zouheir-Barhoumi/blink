@@ -57,7 +57,11 @@ const UserList: React.FC<UserListProps> = ({ onSelectChat }) => {
       /** Check if user chat exists  */
       if (selectedUserId && userId) {
         const existingChat = await getChat(selectedUserId, userId);
-        if (existingChat) {
+        /*
+         ? What is existingChat returning 
+        */
+        if (existingChat._id) {
+          console.log("existingChat: " + existingChat._id);
           chatId = existingChat._id;
           alert("Existing chat Id: " + chatId);
         } else {
