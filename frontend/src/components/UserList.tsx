@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUsers } from "../services/usersService";
 import UserCard from "./UserCard";
 import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
+import { getChat, createChat } from "../services/chatService";
 
 // interface User {
 //   _id: string;
@@ -13,9 +14,14 @@ import { Box, Heading, UnorderedList, ListItem, Text } from "@chakra-ui/react";
 //   __v: number;
 // }
 
-const UserList: React.FC = () => {
+interface UserListProps {
+  onSelectChat: (chatId: string) => void;
+  userId: string;
+}
+
+const UserList: React.FC<UserListProps> = ({ onSelectChat, userId }) => {
   const [users, setUsers] = useState<Record<string, any>[]>([]);
-  const [userId, setUserId] = useState<string | null>(null);
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [activeStates, setActiveStates] = useState<boolean[]>([]);
@@ -44,9 +50,27 @@ const UserList: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  const toggleActiveState = (user: any, index: number) => {
-    // setUserId(user._id);
-    setUserId(user.username);
+  const toggleActiveState = async (user: any, index: number) => {
+    setSelectedUserId(user._id);
+    try {
+      let chatId;
+      /** Check if user chat exists  */
+      if (selectedUserId) {
+        const existingChat = await getChat(selectedUserId, userId);
+        if (existingChat) {
+          chatId = existingChat._id;
+          alert("Existing chat Id: " + chatId);
+        } else {
+          const newChat = await createChat([userId, user._id]);
+          chatId = newChat._id;
+        }
+        // Notify parent component of the selected chat
+        onSelectChat(chatId);
+      }
+    } catch (error) {
+      console.log("Error setting chat state", error);
+    }
+
     setActiveStates(() => {
       const newStates: boolean[] = [];
       newStates[index] = !newStates[index];

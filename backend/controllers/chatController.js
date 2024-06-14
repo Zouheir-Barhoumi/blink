@@ -63,6 +63,23 @@ const getChatHistory = async (req, res) => {
   }
 };
 
+// Get chat by user1 and user2 ids
+const getChatByUsers = async (req, res) => {
+  try {
+    const { user1, user2 } = req.query;
+    const chat = await Chat.findOne({
+      $or: [{ participants: [user1, user2] }, { participants: [user2, user1] }],
+    });
+    if (!chat) {
+      return res.status(404).json({ error: "Chat not found" });
+    }
+    res.status(200).json(chatId);
+  } catch (error) {
+    console.log(`Error retrieving chat ID: ${error}`);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // Get a list of users
 const getUsers = async (req, res) => {
   try {
@@ -74,4 +91,4 @@ const getUsers = async (req, res) => {
   }
 };
 
-export { createChat, sendMessage, getChatHistory, getUsers };
+export { createChat, sendMessage, getChatHistory, getUsers, getChatByUsers };

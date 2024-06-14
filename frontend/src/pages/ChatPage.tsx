@@ -9,11 +9,7 @@ const ChatPage: React.FC = () => {
       {/* <Heading as="h1" mb={4}>
         Welcome, {user}!
       </Heading> */}
-
-      <ChatWindow
-        chatId="665c2e6b592945ecab1c35d3"
-        userId="665c257525713d838e9ab6fd"
-      />
+      <ChatWindow />
     </Container>
   );
 };
