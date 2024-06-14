@@ -23,6 +23,7 @@ const LoginForm: React.FC = () => {
       console.log("Login success: ", response);
       alert("Login successful: " + JSON.stringify(response));
       localStorage.setItem("username", response.user.username);
+      localStorage.setItem("userId", response.user._id);
       window.location.href = "/chat";
     } catch (error) {
       alert("Login failed: " + error);

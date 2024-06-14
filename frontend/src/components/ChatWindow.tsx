@@ -59,7 +59,7 @@ const ChatWindow: React.FC = () => {
   return (
     <Flex className="chat-window" pt="7rem" gap="1rem">
       {/* <UserList chatId={chatId} /> */}
-      <UserList onSelectChat={setChatId} userId={userId} />
+      <UserList onSelectChat={setChatId} />
       <Box w="100%" h="100%">
         <MessageInput
           chatId={chatId || ""}
