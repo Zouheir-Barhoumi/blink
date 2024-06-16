@@ -11,6 +11,14 @@ const createChat = async (req, res) => {
         .status(400)
         .json({ error: "At least two users are required to create a chat" });
     }
+
+    // Validate the participants' IDs
+    for (const participant of participants) {
+      if (!mongoose.Types.ObjectId.isValid(participant)) {
+        return res.status(400).json({ error: "Invalid user ID" });
+      }
+    }
+
     const users = await User.find({ _id: { $in: participants } });
     if (users.length !== participants.length) {
       return res.status(400).json({ error: "Some users were not found" });

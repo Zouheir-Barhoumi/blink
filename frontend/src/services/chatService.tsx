@@ -17,11 +17,12 @@ export const getChat = async (user1: string, user2: string) => {
 };
 
 export const createChat = async (participants: string[]) => {
-  console.log("Hi from createChat");
+  console.log(`Hi from createChat: ${participants}`);
   try {
-    const response = await axios.post(API_URL, { participants });
+    const response = await axios.post(`${API_URL}/create`, { participants });
     return response.data;
   } catch (error: any) {
+    console.log("Error details:", error); // logging the original error
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
